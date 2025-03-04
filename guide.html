@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSX Online - Setup Guide</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/magic.css">
+</head>
+<body>
+    <header>
+        <h1>Setup Guide</h1>
+        <div class="nav-wrap shadow-wrap">
+            <nav class="quick-nav">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="patch.html" class="nav-item">Patch</a>
+                <a href="guide.html" class="nav-item">Guide</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container home-container">
+            <!-- Required Downloads -->
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Required Downloads</h2>
+                        <button class="collapse-toggle" aria-label="Toggle section">▼</button>
+                    </div>
+                    <div class="panel-content">
+                        <ul>
+                            <li><a href="https://npcap.com/#download" target="_blank">NPCAP</a> - Required for network connectivity</li>
+                            <li><a href="https://www.psx-place.com/threads/dnas-patcher-21.37973/" target="_blank">DNAS Patcher21</a> - Required to bypass DNAS checks</li>
+                            <li><a href="https://github.com/GlitcherOG/Project-Mcomm/tree/main/Patches" target="_blank">Patches</a> - Premade patches</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>Required Ports:</strong>
+                            <ul>
+                                <li>SSX 3 Gameplay: <code>UDP 3658-3659</code></li>
+                                <li>Voice Chat (Optional): <code>UDP 6000-6001</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server Setup -->
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Server Setup (Optional - For Hosting Only)</h2>
+                        <button class="collapse-toggle" aria-label="Toggle section">▼</button>
+                    </div>
+                    <div class="panel-content">
+                        <ol>
+                            <li>Run the server executable to generate configuration files</li>
+                            <li>Port forward the following ports to your server:
+                                <ul>
+                                    <li>ListenerPort (<code>11000</code>)</li>
+                                    <li>GamePort (<code>10901</code>)</li>
+                                    <li>BuddyPort (<code>13505</code>)</li>
+                                </ul>
+                            </li>
+                            <li>Edit the config file to include your server's IP address</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PCSX2 Setup -->
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>PCSX2 Configuration</h2>
+                        <button class="collapse-toggle" aria-label="Toggle section">▼</button>
+                    </div>
+                    <div class="panel-content">
+                        <ol>
+                            <li>Use DNAS Patcher21 to bypass DNAS checks:
+                                <ul>
+                                    <li>Use modes 1 and 3 to generate a patched ISO</li>
+                                </ul>
+                            </li>
+                            <li>Configure PCSX2 network settings:
+                                <ol>
+                                    <li>If using .pnach for server address, leave DNS1 on <code>Auto</code> and skip to Step 3</li>
+                                    <li>Set DNS1 Address to <code>Internal</code></li>
+                                    <li>Add entry in Internal DNS: <code>ps2ssx04.ea.com</code> → your server IP</li>
+                                </ol>
+                            </li>
+                            <li>Set up PCAP (see <a href="#pcap-configuration">PCAP Configuration</a> section)</li>
+                            <li>Port forward UDP ports:
+                                <ul>
+                                    <li><code>3658-3659</code> for Gameplay</li>
+                                    <li><code>6000-6001</code> for Voice Chat</li>
+                                </ul>
+                            </li>
+                            <li>In-game network configuration:
+                                <ul>
+                                    <li>Use settings: <code>Not Required</code>, <code>Auto</code>, <code>Auto</code></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PCAP Setup -->
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>PCAP Configuration</h2>
+                        <button class="collapse-toggle" aria-label="Toggle section">▼</button>
+                    </div>
+                    <div class="panel-content">
+                        <div class="info-box">
+                            <strong>Note:</strong> PCAP Switched is recommended for most reliable connections
+                        </div>
+                        <div class="info-box">
+                            <strong>Note:</strong> PCAP options treat PCSX2 as a unique device on your network, so you need to create an IP address for it
+                        </div>
+                        <ol>
+                            <li>Install NPCAP from the <a href="#required-downloads">Required Downloads</a> section</li>
+                            <li>In PCSX2 Settings → Network & HDD:
+                                <ol>
+                                    <li>Choose <code>PCAP Switched</code> for Ethernet or <code>PCAP Bridged</code> for WiFi</li>
+                                    <li>Enable "Intercept DHCP" and find the PS2 Address Box</li>
+                                    <li>Set PS2 Address: Use first 3 sections of your gateway (e.g., <code>192.168.1.</code>)</li>
+                                    <li>For the last number, use <code>100-250</code> to avoid conflicts</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Windows Firewall -->
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Windows Firewall Setup</h2>
+                        <button class="collapse-toggle" aria-label="Toggle section">▼</button>
+                    </div>
+                    <div class="panel-content">
+                        <h3>Add PCSX2 Exception</h3>
+                        <ol>
+                            <li>Open <code>Control Panel → System and Security → Windows Defender Firewall</code></li>
+                            <li>Click "Allow an app through Windows Defender Firewall"</li>
+                            <li>Click "Allow another app" and browse to PCSX2 executable</li>
+                        </ol>
+
+                        <h3>Create Inbound Rules</h3>
+                        <ol>
+                            <li>Open Advanced Settings in Windows Defender Firewall</li>
+                            <li>Create new Inbound Rules:
+                                <ul>
+                                    <li>One for UDP Protocol</li>
+                                    <li>One for TCP Protocol</li>
+                                </ul>
+                            </li>
+                            <li>For each rule:
+                                <ol>
+                                    <li>Select <code>Custom</code> rule type</li>
+                                    <li>Browse to PCSX2 executable</li>
+                                    <li>Name them <code>PCSX2 UDP</code> and <code>PCSX2 TCP</code></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Common Issues & Notes</h2>
+                        <button class="collapse-toggle" aria-label="Toggle section">▼</button>
+                    </div>
+                    <div class="panel-content">
+                        <ul>
+                            <li>Find your gateway address using <code>ipconfig</code> in Command Prompt</li>
+                            <li>PAL and NTSC versions cannot play together</li>
+                            <li>Without Port Forwarding (<code>3658-3659</code>):
+                                <ul>
+                                    <li>You can still play, but your experience may be limited</li>
+                                    <li>You can only challenge players who have forwarded their ports</li>
+                                    <li>You cannot receive challenges from others</li>
+                                </ul>
+                            </li>
+                            <li>"User has declined your challenge" error usually indicates port forwarding issues</li>
+                            <li>Players on the same network can play together</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Project by GlitcherOG(Archy). Site by Bane.</p>
+    </footer>
+
+    <script>
+        // Panel collapse functionality
+        document.querySelectorAll('.panel-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('collapsed');
+            });
+        });
+    </script>
+</body>
+</html>

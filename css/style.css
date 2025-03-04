@@ -431,6 +431,10 @@ h2 {
         transform: translateY(-2px);
         background: linear-gradient(315deg, #5381a0 0%, #6391b0 100%);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+        h3 {
+            color: #ffffff;
+        }
     }
 
     h3 {
@@ -438,6 +442,7 @@ h2 {
         margin: 0;
         margin-bottom: 0.5rem;
         font-size: 1.1em;
+        transition: color 0.2s ease;
     }
 
     p {
@@ -472,7 +477,7 @@ h2 {
         background: linear-gradient(315deg, #407497 0%, #5381a0 100%);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
-        font-family: "Orbitron", sans-serif;
+        font-family: "Roboto", sans-serif;
         outline: none;
         transition: background-color 0.2s ease;
 

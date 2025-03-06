@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSXOR - Highscores</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/magic.css">
+
+    <script defer src="js/api.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/highscore.js"></script>
+
+    <style>
+        main {
+            display: flex;
+            justify-content: flex-start !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Highscores</h1>
+        <div class="nav-wrap shadow-wrap">
+            <nav class="quick-nav">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="patch.html" class="nav-item">Patch</a>
+                <a href="guide.html" class="nav-item">Guide</a>
+                <a href="highscores.html" class="nav-item">Highscores</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="filter-controls">
+                        <div class="search-bar">
+                            <input type="text" id="playerSearch" placeholder="Search players...">
+                        </div>
+                        <div class="version-filters">
+                            <button class="version-button active" data-version="NTSC">NTSC</button>
+                            <button class="version-button active" data-version="PAL 1.0">PAL 1.0</button>
+                            <button class="version-button active" data-version="PAL 2.0">PAL 2.0</button>
+                        </div>
+                    </div>
+                    <div class="mode-buttons">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <div class="course-tabs">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <div class="scores-container">
+                        <table class="scores-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Player</th>
+                                    <th>Version</th>
+                                    <th class="score-header">Time</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scoresBody">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Project by <a href="https://github.com/GlitcherOG">GlitcherOG(Archy)</a>. Site by <a href="https://github.com/Jordy3D">Bane</a>.</p>
+    </footer>
+</body>
+</html>

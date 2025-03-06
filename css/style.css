@@ -169,6 +169,14 @@ header {
             width: 100%;
         }
     }
+
+    &.active {
+        color: #ffffff;
+
+        &::after {
+            width: 100%;
+        }
+    }
 }
 
 footer {
@@ -564,6 +572,198 @@ pre {
     font-family: "Courier New", monospace;
     white-space: pre-wrap;
 }
+
+/* Highscores specific styles */
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    > div {
+        height: 40px;
+    }
+}
+
+.search-bar {
+    flex: 1;
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding: 0.5rem 1rem;
+        background: rgba(64, 116, 151, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+}
+
+.version-filters {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.version-button {
+    background: rgba(64, 116, 151, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #93c3dc;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.9em;
+
+    &:hover {
+        background: rgba(64, 116, 151, 0.5);
+        color: #ffffff;
+    }
+
+    &.active {
+        background: #93c3dc;
+        color: #407497;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background: rgba(64, 116, 151, 0.1);
+        border-color: rgba(255, 255, 255, 0.1);
+        
+        &:hover {
+            background: rgba(64, 116, 151, 0.1);
+            color: #93c3dc;
+        }
+    }
+}
+
+.version-filters {
+    display: flex;
+    gap: 1rem;
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #93c3dc;
+    }
+}
+
+.course-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    background: rgba(64, 116, 151, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #93c3dc;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.9em;
+
+    &:hover {
+        background: rgba(64, 116, 151, 0.5);
+        color: #ffffff;
+    }
+
+    &.active {
+        background: #93c3dc;
+        color: #407497;
+    }
+}
+
+.scores-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-family: "Roboto", sans-serif;
+
+    th,
+    td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    th {
+        background: rgba(64, 116, 151, 0.3);
+        color: #93c3dc;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.9em;
+        text-transform: uppercase;
+    }
+
+    tbody tr:hover {
+        background: rgba(64, 116, 151, 0.2);
+    }
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mode-button {
+    background: rgba(64, 116, 151, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #93c3dc;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &:hover {
+        background: rgba(64, 116, 151, 0.5);
+        color: #ffffff;
+    }
+
+    &.active {
+        background: #93c3dc;
+        color: #407497;
+        font-weight: bold;
+    }
+}
+
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 2rem;
+    color: #93c3dc;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(147, 195, 220, 0.3);
+    border-top-color: #93c3dc;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+}
+
+.error-state {
+    color: #ff6b6b;
+
+    .action-button {
+        margin-top: 1rem;
+        display: inline-block;
+    }
+}
+
 /*#endregion*/
 
 /*
@@ -578,7 +778,6 @@ pre {
             position: relative;
         }
     }
-
 
     main .split-container {
         grid-template-columns: 1fr;
@@ -605,4 +804,19 @@ pre {
         bottom: -0.75rem;
     }
 }
+/*#endregion*/
+
+/*
+▄▀█ █▄ █ █ █▀▄▀█ ▄▀█ ▀█▀ █ █▀█ █▄ █ █▀ 
+█▀█ █ ▀█ █ █ ▀ █ █▀█  █  █ █▄█ █ ▀█ ▄█ 
+*/
+
+/*#region Animations */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /*#endregion*/

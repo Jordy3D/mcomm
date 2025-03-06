@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSX Online - Setup Guide</title>
+    <title>SSXOR - Setup Guide</title>
     
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/magic.css">
+    
+    <script defer src="js/main.js"></script>
 </head>
 <body>
     <header>
@@ -16,6 +18,7 @@
                 <a href="index.html" class="nav-item">Home</a>
                 <a href="patch.html" class="nav-item">Patch</a>
                 <a href="guide.html" class="nav-item">Guide</a>
+                <a href="highscores.html" class="nav-item">Highscores</a>
             </nav>
         </div>
     </header>
@@ -202,14 +205,5 @@
     <footer>
         <p>Project by <a href="https://github.com/GlitcherOG">GlitcherOG(Archy)</a>. Site by <a href="https://github.com/Jordy3D">Bane</a>.</p>
     </footer>
-
-    <script>
-        // Panel collapse functionality
-        document.querySelectorAll('.panel-header').forEach(header => {
-            header.addEventListener('click', () => {
-                header.parentElement.classList.toggle('collapsed');
-            });
-        });
-    </script>
 </body>
 </html>

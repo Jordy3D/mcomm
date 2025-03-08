@@ -30,6 +30,8 @@ body {
         linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%);
     background-size: cover, 4px 4px;
     background-attachment: fixed, scroll;
+
+    overflow-x: hidden;
 }
 
 h1,
@@ -661,6 +663,10 @@ pre {
     margin-bottom: 1rem;
 }
 
+.scores-container {
+    overflow-x: auto;
+}
+
 .tab-button {
     background: rgba(64, 116, 151, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -865,6 +871,16 @@ pre {
     .quick-nav {
         left: 1rem;
         bottom: -0.75rem;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        > div {
+            width: 100%;
+        }
     }
 
     .online-layout {

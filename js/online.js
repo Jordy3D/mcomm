@@ -1,17 +1,38 @@
 class OnlineTracker {
     static REFRESH_INTERVAL = 10000; // 10 seconds
     static #updateInterval = null;
+    static #isInitialized = false;
+    
+    /*
+    █ █▄ █ █ ▀█▀ 
+    █ █ ▀█ █  █  
+    */
 
     static async initialize() {
-        // Initial load
-        await this.updateData();
+        // Initial load with spinner
+        await this.updateData(true);
+        this.#isInitialized = true;
         
         // Set up periodic updates
-        this.#updateInterval = setInterval(() => this.updateData(), this.REFRESH_INTERVAL);
+        this.#updateInterval = setInterval(() => this.updateData(false), this.REFRESH_INTERVAL);
     }
 
-    static async updateData() {
+    /*
+    █▀▄ ▄▀█ ▀█▀ ▄▀█  
+    █▄▀ █▀█  █  █▀█  
+    */
+
+    static async updateData(isInitialLoad = false) {
+        const roomsContainer = document.getElementById('rooms-container');
+        const playersContainer = document.getElementById('players-container');
+        
         try {
+            // Show loading state on initial load or retry
+            if (isInitialLoad) {
+                LoadingState.show(roomsContainer, 'Loading rooms...');
+                LoadingState.show(playersContainer, 'Loading players...');
+            }
+
             const [rooms, players] = await Promise.all([
                 APIService.fetchRooms(),
                 APIService.fetchOnlinePlayers()
@@ -21,8 +42,23 @@ class OnlineTracker {
             this.displayPlayers(players);
         } catch (error) {
             console.error('Failed to update online data:', error);
+            if (isInitialLoad || !roomsContainer.children.length) {
+                LoadingState.showError(
+                    roomsContainer, 
+                    'Failed to load rooms', 
+                    'async () => OnlineTracker.updateData(true)'
+                );
+            }
+            if (isInitialLoad || !playersContainer.children.length) {
+                LoadingState.showError(playersContainer, 'Failed to load players');
+            }
         }
     }
+
+    /*
+    █▀▄ █ █▀ █▀█ █   ▄▀█ █▄█ 
+    █▄▀ █ ▄█ █▀▀ █▄▄ █▀█  █  
+    */
 
     static displayRooms(rooms) {
         const container = document.getElementById('rooms-container');
@@ -61,17 +97,26 @@ class OnlineTracker {
         });
     }
 
+    /*
+    █ █ █▀▀ █   █▀█ █▀▀ █▀█ 
+    █▀█ ██▄ █▄▄ █▀▀ ██▄ █▀▄ 
+    */
+
     static createPlayerElement(player) {
         const playerElement = document.createElement('div');
         playerElement.className = 'player-card';
-        playerElement.innerHTML = 
-`\
-<span class="player-name">${player.playerName}</span>
-<span class="player-version">${player.playerVersion}</span>\
-`;
+        playerElement.innerHTML = `
+            <span class="player-name">${player.playerName}</span>
+            <span class="player-version">${player.playerVersion}</span>
+        `;
         return playerElement;
     }
 }
+
+/*
+█▀▀ █ █ █▀▀ █▄ █ ▀█▀   █ █ ▄▀█ █▄ █ █▀▄ █   █▀▀ █▀█ █▀ 
+██▄ ▀▄▀ ██▄ █ ▀█  █    █▀█ █▀█ █ ▀█ █▄▀ █▄▄ ██▄ █▀▄ ▄█ 
+*/
 
 // Initialize when the page loads
 document.addEventListener('DOMContentLoaded', () => OnlineTracker.initialize());

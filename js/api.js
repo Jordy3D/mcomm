@@ -1,3 +1,15 @@
+// API Endpoints for SSX Online Revival
+// 
+// ┃ METHOD ┃ ENDPOINT        ┃ DESCRIPTION                                   ┃
+// ┣━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+// ┃ GET    ┃ /highscore      ┃ Returns all highscores                        ┃
+// ┃ GET    ┃ /highscore/<ID> ┃ Returns highscores for the given course       ┃
+// ┃ GET    ┃ /online         ┃ Returns all online players                    ┃
+// ┃ GET    ┃ /room           ┃ Returns all rooms and the players inside them ┃
+// ┃        ┃                 ┃                                               ┃
+// ┃        ┃                 ┃                                               ┃
+// ┃        ┃                 ┃                                               ┃
+
 class APIService {
     static API_BASE_URL = 'http://ssxor.org/api';
     static LOCAL_DATA_PATH = '/data/example';
@@ -12,7 +24,6 @@ class APIService {
         ONLINE_PLAYERS: { path: 'online', localFile: 'online.json' },
         ACTIVE_ROOMS: { path: 'room', localFile: 'room.json' },
     };
-
 
     static async loadLocalData(filename) {
         try {
@@ -85,5 +96,9 @@ class APIService {
     }
 }
 
-// Make APIService globally available
+/*
+█ █ █ █ █▄ █ █▀▄ █▀█ █ █ █ 
+▀▄▀▄▀ █ █ ▀█ █▄▀ █▄█ ▀▄▀▄▀ 
+*/
+
 window.APIService = APIService;

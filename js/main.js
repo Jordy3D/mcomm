@@ -1,3 +1,8 @@
+/*
+█▄ █ ▄▀█ █ █ █ █▀▀ ▄▀█ ▀█▀ █ █▀█ █▄ █ 
+█ ▀█ █▀█ ▀▄▀ █ █▄█ █▀█  █  █ █▄█ █ ▀█ 
+*/
+
 // Navigation items configuration
 const navigationItems = [
     { url: 'index.html', text: 'Home' },
@@ -17,10 +22,50 @@ function initializeNavigation() {
 
     nav.innerHTML = navigationItems
         .map(item => `
-            <a href="${item.url}" 
-               class="nav-item${currentPage === item.url ? ' active' : ''}">${item.text}</a>
+            <a href="${item.url}" class="nav-item${currentPage === item.url ? ' active' : ''}">${item.text}</a>
         `).join('');
 }
+/*
+█   █▀█ ▄▀█ █▀▄ █ █▄ █ █▀▀ 
+█▄▄ █▄█ █▀█ █▄▀ █ █ ▀█ █▄█ 
+*/
+
+// Loading state management
+class LoadingState {
+    static show(container, message = 'Loading...') {
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>${message}</p>
+            </div>
+        `;
+    }
+
+    static showError(container, message, retryCallback = null) {
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="error-state">
+                <p>${message}</p>
+                ${retryCallback ? `
+                    <button class="action-button" onclick="(${retryCallback})()">Retry</button>
+                ` : ''}
+            </div>
+        `;
+    }
+
+    static clear(container) {
+        if (!container) return;
+        container.innerHTML = '';
+    }
+}
+
+/*
+█▀▀ █ █ █▀▀ █▄ █ ▀█▀   █ █ ▄▀█ █▄ █ █▀▄ █   █▀▀ █▀█ █▀ 
+██▄ ▀▄▀ ██▄ █ ▀█  █    █▀█ █▀█ █ ▀█ █▄▀ █▄▄ ██▄ █▀▄ ▄█ 
+*/
 
 // Initialize collapsible panels
 document.querySelectorAll('.panel-header').forEach(header => {
@@ -32,3 +77,10 @@ document.querySelectorAll('.panel-header').forEach(header => {
 
 // Initialize navigation when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeNavigation);
+
+/*
+█ █ █ █ █▄ █ █▀▄ █▀█ █ █ █ 
+▀▄▀▄▀ █ █ ▀█ █▄▀ █▄█ ▀▄▀▄▀ 
+*/
+
+window.LoadingState = LoadingState;

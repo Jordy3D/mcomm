@@ -11,10 +11,6 @@ let filters = {
     search: ''
 };
 
-// Add loading state management
-let isLoading = false;
-let loadError = null;
-
 // Make the initialization function globally available for the retry button
 window.loadHighscores = async function() {
     await initializeHighscores();
@@ -77,69 +73,50 @@ function formatTime(ticks) {
 */
 
 async function initializeHighscores() {
+    const container = document.querySelector('.scores-container');
+    
     try {
-        isLoading = true;
-        updateLoadingState();
+        LoadingState.show(container, 'Loading highscores...');
         
         const data = await APIService.fetchHighscores();
         courses = data.courseEntries
             .filter(course => course.Name !== "Null" && course.Name !== "Overall")
             .map(course => new CourseEntry(course.ID, course.Name, course.Entries));
         
+        // Initialize UI elements first
         initializeModeButtons();
         initializeTabs();
-        setMode('race');
         
-        isLoading = false;
-        loadError = null;
+        // Explicitly set initial mode and select first tab
+        const raceCourses = courses.filter(c => c.mode === 'race');
+        if (raceCourses.length > 0) {
+            activeMode = 'race';
+            
+            // Create the table structure
+            container.innerHTML = `
+                <table class="scores-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Version</th>
+                            <th class="score-header">Time</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scoresBody"></tbody>
+                </table>
+            `;
+            
+            // Now select the tab which will populate the table
+            selectTab(raceCourses[0].id);
+        }
     } catch (error) {
-        isLoading = false;
-        loadError = 'Unable to connect to highscore server. Please try again later.';
         console.error('Failed to initialize highscores:', error);
-    }
-    updateLoadingState();
-}
-
-async function updateLoadingState() {
-    const container = document.querySelector('.scores-container');
-    if (!container) return; // Guard against missing container
-
-    if (isLoading) {
-        container.innerHTML = `
-            <div class="loading-state">
-                <div class="loading-spinner"></div>
-                <p>Loading highscores...</p>
-            </div>
-        `;
-        return;
-    }
-    
-    if (loadError) {
-        container.innerHTML = `
-            <div class="error-state">
-                <p>${loadError}</p>
-                <button class="action-button" onclick="window.loadHighscores()">Retry</button>
-            </div>
-        `;
-        return;
-    }
-
-    // Make sure we have scores before showing the table
-    if (courses.length > 0 && !container.querySelector('.scores-table')) {
-        container.innerHTML = `
-            <table class="scores-table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Version</th>
-                        <th class="score-header">Time</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="scoresBody"></tbody>
-            </table>
-        `;
+        LoadingState.showError(container, 
+            'Unable to connect to highscore server. Please try again later.',
+            'loadHighscores'
+        );
     }
 }
 
@@ -187,35 +164,16 @@ function setMode(mode) {
         btn.classList.toggle('active', btn.dataset.mode === mode);
     });
 
-    // Create table structure first if it doesn't exist
-    const container = document.querySelector('.scores-container');
-    if (!container.querySelector('.scores-table')) {
-        container.innerHTML = `
-            <table class="scores-table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Player</th>
-                        <th>Version</th>
-                        <th class="score-header">${mode === 'race' ? 'Time' : 'Score'}</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="scoresBody"></tbody>
-            </table>
-        `;
-    } else {
-        // Update existing header
-        const scoreHeader = container.querySelector('.score-header');
-        if (scoreHeader) {
-            scoreHeader.textContent = mode === 'race' ? 'Time' : 'Score';
-        }
+    // Update existing header
+    const scoreHeader = document.querySelector('.score-header');
+    if (scoreHeader) {
+        scoreHeader.textContent = mode === 'race' ? 'Time' : 'Score';
     }
 
     // Update tabs for this mode
     initializeTabs();
     
-    // Select first tab of this mode if none selected
+    // Select first tab of this mode
     const modeCourses = courses.filter(c => c.mode === mode);
     if (modeCourses.length > 0) {
         selectTab(modeCourses[0].id);

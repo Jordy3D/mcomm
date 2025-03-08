@@ -22,19 +22,19 @@ window.loadHighscores = async function() {
 */
 
 class ScoreEntry {
-    constructor(gameVersion, name, score, raceDataFile) {
+    constructor(gameVersion, name, score, raceDataFile, when) {
         this.gameVersion = gameVersion;
         this.name = name;
         this.score = score;
         this.raceDataFile = raceDataFile;
-        this.date = this.parseDate(raceDataFile);
+        this.date = this.parseDate(when);
     }
 
-    parseDate(raceDataFile) {
-        if (raceDataFile === "NULL") return null;
+    parseDate(date) {
+        if (date === "NULL") return null;
 
-        const parts = raceDataFile.split(' ');
-        return new Date(`${parts[1].replace(/\./g, '-')} ${parts[2]}`);
+        const parts = date.split(' ');
+        return new Date(`${parts[0].replace(/\./g, '-')} ${parts[1]}`);
     }
 
     getGameUrl() {
@@ -49,7 +49,7 @@ class CourseEntry {
         this.mode = this.determineMode(id);
         this.scores = entries
             .filter(e => e.RaceDataFile !== "NULL")
-            .map(e => new ScoreEntry(e.GameVersion, e.Name, e.Score, e.RaceDataFile));
+            .map(e => new ScoreEntry(e.GameVersion, e.Name, e.Score, e.RaceDataFile, e.When));
     }
 
     determineMode(id) {

@@ -26,13 +26,19 @@ class ScoreEntry {
         this.gameVersion = gameVersion;
         this.name = name;
         this.score = score;
+        this.raceDataFile = raceDataFile;
         this.date = this.parseDate(raceDataFile);
     }
 
     parseDate(raceDataFile) {
         if (raceDataFile === "NULL") return null;
+
         const parts = raceDataFile.split(' ');
         return new Date(`${parts[1].replace(/\./g, '-')} ${parts[2]}`);
+    }
+
+    getGameUrl() {
+        return this.raceDataFile === "NULL" ? null : this.raceDataFile;
     }
 }
 
@@ -77,6 +83,9 @@ async function initializeHighscores() {
     
     try {
         LoadingState.show(container, 'Loading highscores...');
+        
+        // Initialize modal first
+        GameModal.initialize();
         
         const data = await APIService.fetchHighscores();
         courses = data.courseEntries
@@ -204,7 +213,7 @@ function updateScoresDisplay() {
 
     document.getElementById('scoresBody').innerHTML = filteredScores
         .map((score, index) => `
-            <tr>
+            <tr class="gameDetailRow" onclick="GameModal.show('${score.getGameUrl()}')">
                 <td>${index + 1}</td>
                 <td>${score.name}</td>
                 <td>${score.gameVersion}</td>
@@ -254,30 +263,43 @@ function updateVersionButtonStates() {
 ██▄ ▀▄▀ ██▄ █ ▀█  █    █▀█ █▀█ █ ▀█ █▄▀ █▄▄ ██▄ █▀▄ ▄█ 
 */
 
-// Event Listeners
-document.querySelector('.version-filters').addEventListener('click', e => {
-    if (e.target.classList.contains('version-button')) {
-        e.target.classList.toggle('active');
-        const version = e.target.dataset.version;
-        if (e.target.classList.contains('active')) {
-            filters.versions.add(version);
-        } else {
-            filters.versions.delete(version);
+// Update the event listener to be added during initialization
+function initializeEventListeners() {
+    document.querySelector('.version-filters').addEventListener('click', e => {
+        if (e.target.classList.contains('version-button')) {
+            e.target.classList.toggle('active');
+            const version = e.target.dataset.version;
+            if (e.target.classList.contains('active')) {
+                filters.versions.add(version);
+            } else {
+                filters.versions.delete(version);
+            }
+            updateScoresDisplay();
         }
+    });
+
+    document.getElementById('playerSearch').addEventListener('input', e => {
+        filters.search = e.target.value;
+        updateVersionButtonStates();
         updateScoresDisplay();
-    }
-});
+    });
 
-document.getElementById('playerSearch').addEventListener('input', e => {
-    filters.search = e.target.value;
-    updateVersionButtonStates();
-    updateScoresDisplay();
-});
+    // Use event delegation on a parent element that exists when the page loads
+    document.querySelector('.scores-container').addEventListener('click', e => {
+        const gameLink = e.target.closest('.game-link');
+        if (gameLink) {
+            e.preventDefault();
+            const rdf = gameLink.dataset.rdf;
+            GameModal.show(rdf);
+        }
+    });
+}
 
-// Initialize when document is fully loaded
+// Add the initialization function call
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         await initializeHighscores();
+        initializeEventListeners();
     } catch (error) {
         console.error('Failed to load highscores:', error);
     }

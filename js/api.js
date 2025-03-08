@@ -6,7 +6,7 @@
 // ┃ GET    ┃ /highscore/<ID> ┃ Returns highscores for the given course       ┃
 // ┃ GET    ┃ /online         ┃ Returns all online players                    ┃
 // ┃ GET    ┃ /room           ┃ Returns all rooms and the players inside them ┃
-// ┃        ┃                 ┃                                               ┃
+// ┃ GET    ┃ /game/<RDF>     ┃ Returns the information about a given game    ┃
 // ┃        ┃                 ┃                                               ┃
 // ┃        ┃                 ┃                                               ┃
 
@@ -23,6 +23,7 @@ class APIService {
         HIGHSCORES: { path: 'highscore', localFile: 'highscores.json' },
         ONLINE_PLAYERS: { path: 'online', localFile: 'online.json' },
         ACTIVE_ROOMS: { path: 'room', localFile: 'room.json' },
+        GAME: { path: 'game', localFile: 'game.json' }
     };
 
     static async loadLocalData(filename) {
@@ -38,7 +39,7 @@ class APIService {
         }
     }
 
-    static async fetchFromAPI(endpointKey) {
+    static async fetchFromAPI(endpointKey, endpointContinuation = '') {
         if (!this.ENDPOINTS[endpointKey]) {
             throw new Error(`Unknown endpoint: ${endpointKey}`);
         }
@@ -47,9 +48,16 @@ class APIService {
         var url = `${this.API_BASE_URL}/${endpoint.path}`;
 
         if (this.CORS_PROXY_ENABLED) {
-            if (this.PROXY_NEEDED.some(host => window.location.href.includes(host)))
+            if (this.PROXY_NEEDED.some(host => window.location.href.includes(host))) {
                 url = `${this.CORS_PROXY}${url}`;
+                console.info(`Fetching data from ${url}`);
+            }
         }
+
+        if (endpointContinuation) {
+            url += `/${endpointContinuation}`;
+        }
+
         
         try {
             // Try server first
@@ -93,6 +101,12 @@ class APIService {
 
     static async fetchRooms() {
         return this.fetchFromAPI('ACTIVE_ROOMS');
+    }
+
+    static async fetchGame(rdf, raw = false) {
+        if (raw) return this.fetchFromAPI('GAME', `${rdf}&raw=1`);
+
+        return this.fetchFromAPI('GAME', rdf);
     }
 }
 

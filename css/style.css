@@ -7,6 +7,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap");
 
+:root {
+    /* Colors */
+    --primary-color: #407497;
+    --secondary-color: #5381a0;
+    --accent-color: #93c3dc;
+    --dark-color: #204865;
+    --light-color: #e4e4e4;
+    --error-color: #ff6b6b;
+    --highlight-color: #d48731;
+
+    /* Gradients */
+    --primary-gradient: linear-gradient(315deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --secondary-gradient: linear-gradient(225deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --hover-gradient: linear-gradient(315deg, var(--secondary-color) 0%, #6391b0 100%);
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+
+    /* Shadows */
+    --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-inset: inset 0 1px rgba(255, 255, 255, 0.1);
+    --shadow-box: var(--shadow-inset), var(--shadow-sm);
+
+    /* Clips */
+    --clip-sm: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+    --clip-lg: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,7 +47,7 @@
 }
 
 body {
-    color: #ffffff;
+    color: var(--light-color);
     font-family: "Roboto", sans-serif;
     /* min-height: 100vh; */
     display: flex;
@@ -101,9 +132,9 @@ a {
 
 /*#region Header/Footer */
 header {
-    padding: 2rem 1rem;
-    background: linear-gradient(315deg, #407497 0%, #5381a0 100%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: var(--spacing-lg) var(--spacing-sm);
+    background: var(--primary-gradient);
+    box-shadow: var(--shadow-sm);
     position: relative;
 
     h1 {
@@ -128,21 +159,15 @@ header {
 
 .quick-nav {
     z-index: 2;
-    background: #427598;
-    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    padding: var(--spacing-xs) var(--spacing-sm);
     display: flex;
-    gap: 1rem;
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - 8px),
-        calc(100% - 8px) 100%,
-        0 100%
-    );
+    gap: var(--spacing-sm);
+    clip-path: var(--clip-sm);
 }
 
 .nav-item {
-    color: #93c3dc;
+    color: var(--accent-color);
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.9em;
@@ -182,7 +207,7 @@ header {
 }
 
 footer {
-    background: linear-gradient(315deg, #407497 0%, #5381a0 100%);
+    background: var(--primary-gradient);
     padding: 1rem;
     margin-top: 2rem;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
@@ -228,20 +253,13 @@ main {
 
 .form-side,
 .preview-side {
-    background: linear-gradient(225deg, #407497 0%, #5381a0 100%);
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - 20px),
-        calc(100% - 20px) 100%,
-        0 100%
-    );
-    padding: 2rem;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.1),
-        0 4px 8px rgba(0, 0, 0, 0.3);
+    background: var(--secondary-gradient);
+    clip-path: var(--clip-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-box);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--spacing-sm);
 }
 
 .preview-side {
@@ -265,18 +283,10 @@ h2 {
 }
 
 .panel {
-    background: linear-gradient(225deg, #407497 0%, #5381a0 100%);
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - 20px),
-        calc(100% - 20px) 100%,
-        0 100%
-    );
-    padding: 2rem;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.1),
-        0 4px 8px rgba(0, 0, 0, 0.3);
-
+    background: var(--secondary-gradient);
+    clip-path: var(--clip-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-box);
     transition: all 0.2s ease;
 
     .panel-header {
@@ -511,10 +521,10 @@ h2 {
 
 .action-button {
     flex: 1;
-    padding: 0.8rem;
-    background: linear-gradient(315deg, #407497 0%, #5381a0 100%);
+    padding: var(--spacing-sm);
+    background: var(--primary-gradient);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #93c3dc;
+    color: var(--accent-color);
     font-family: "Orbitron", sans-serif;
     text-transform: uppercase;
     text-align: center;
@@ -522,21 +532,15 @@ h2 {
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.2s ease;
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - 8px),
-        calc(100% - 8px) 100%,
-        0 100%
-    );
+    clip-path: var(--clip-sm);
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:hover {
-        background: linear-gradient(315deg, #5381a0 0%, #6391b0 100%);
-        color: #ffffff;
+        background: var(--hover-gradient);
+        color: var(--light-color);
     }
 
     &:active {
@@ -545,7 +549,7 @@ h2 {
 
     &[disabled] {
         opacity: 0.5;
-        background: #407497;
+        background: var(--primary-color);
         color: rgba(147, 195, 220, 0.5);
         cursor: not-allowed;
         border-color: rgba(255, 255, 255, 0.1);
@@ -609,14 +613,20 @@ pre {
 
 .version-filters {
     display: flex;
-    gap: 0.5rem;
-}
+    gap: 1rem;
 
+    label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #93c3dc;
+    }
+}
 .version-button {
     background: rgba(64, 116, 151, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #93c3dc;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: "Orbitron", sans-serif;
@@ -641,18 +651,6 @@ pre {
             background: rgba(64, 116, 151, 0.1);
             color: #93c3dc;
         }
-    }
-}
-
-.version-filters {
-    display: flex;
-    gap: 1rem;
-
-    label {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #93c3dc;
     }
 }
 
@@ -712,6 +710,10 @@ pre {
     tbody tr:hover {
         background: rgba(64, 116, 151, 0.2);
     }
+}
+
+.gameDetailRow {
+    cursor: pointer;
 }
 
 .mode-buttons {
@@ -788,7 +790,7 @@ pre {
     background: rgba(0, 0, 0, 0.2);
     padding: 15px;
     margin: 10px 0;
-    border-radius: 5px; 
+    border-radius: 5px;
 
     transition: all 0.2s ease;
 
@@ -833,7 +835,223 @@ pre {
     margin-left: auto;
 }
 
+/* Game page specific styles */
+.game-container {
+    .game-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .game-header h2 {
+        font-size: 2em;
+        margin-bottom: 0.5rem;
+    }
+
+    .game-info {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        color: #93c3dc;
+        font-family: "Orbitron", sans-serif;
+    }
+
+    .players-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .player-card {
+        background: rgba(64, 116, 151, 0.3);
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+
+        &.winner {
+            background: linear-gradient(315deg, #5381a0 0%, #6391b0 100%);
+            border-color: #93c3dc;
+            outline: 4px solid var(--highlight-color);
+
+            transform: translateY(-5px);
+        }
+
+        &:not(.winner) {
+            transform: translateY(5px);
+        }
+    }
+
+    .player-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .player-name {
+            font-family: "Orbitron", sans-serif;
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+    
+        .player-character {
+            color: #93c3dc;
+        }
+    }
+
+    .player-stats {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .stat-value {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2em;
+        color: #ffffff;
+    }
+
+    .dnf-badge {
+        background: rgba(255, 107, 107, 0.2);
+        color: #ff6b6b;
+        padding: 0.3rem 0.6rem;
+        border: 1px solid rgba(255, 107, 107, 0.4);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.9em;
+    }
+}
+
+/* Update scores table to show clickable times/scores */
+.scores-table td a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        color: #93c3dc;
+        text-decoration: underline;
+    }
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    z-index: 101;
+    width: min(90vw, 1000px);
+    max-height: 90vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.game-modal .modal-content {
+    background: var(--secondary-gradient);
+    clip-path: var(--clip-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-box);
+    position: relative;
+    max-height: calc(90vh - 40px);
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #93c3dc;
+    font-size: 2em;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+    line-height: 1;
+
+    &:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+    }
+}
+
+/* Update game container styles for modal context */
+.game-container {
+    .game-header {
+        padding-right: 2rem; /* Make room for close button */
+    }
+}
+
 /*#endregion*/
+
+/* Debug */
+
+.raw-data-button {
+    background: rgba(64, 116, 151, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #93c3dc;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    &:hover {
+        background: rgba(64, 116, 151, 0.5);
+        color: #ffffff;
+    }
+
+    &.active {
+        background: #93c3dc;
+        color: #407497;
+        font-weight: bold;
+    }
+}
+
+.raw-data {
+    margin-top: 2rem;
+
+    max-height: 300px;
+    overflow-y: auto;
+}
 
 /*
 █▀█ █▀▀ █▀ █▀█ █▀█ █▄ █ █▀ █ █ █ █▀▀ 
@@ -854,13 +1072,7 @@ pre {
 
     .form-side,
     .preview-side {
-        clip-path: polygon(
-            0 0,
-            100% 0,
-            100% calc(100% - 10px),
-            calc(100% - 10px) 100%,
-            0 100%
-        );
+        --clip-lg: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
     }
 
     .video-grid {
@@ -880,6 +1092,14 @@ pre {
 
         > div {
             width: 100%;
+        }
+
+        .version-filters {
+            justify-content: space-between;
+
+            .version-button {
+                width: 100%;
+            }
         }
     }
 
@@ -912,3 +1132,11 @@ pre {
 }
 
 /*#endregion*/
+
+
+
+/* TODO 
+
+- Clean up a lot of this stuff
+- Fix clipped boxes to have wraps for their shadows
+*/

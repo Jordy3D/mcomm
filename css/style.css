@@ -153,7 +153,7 @@ header {
         color: #ffffff;
     }
 
-    &[href$=".html"] {
+    &[href] {
         position: relative;
 
         &::after {

@@ -151,14 +151,24 @@
                             <strong>Note:</strong> This may work as an aternative to port forwarding or may fail depending on router settings
                         </div>
                         <ol>
-                            <li>Download https://github.com/kaklakariada/portmapper</li>
-                            <li>On the Router Page Click Connect</li>
-                            <li>If it fails to connect goto port mapper settings and try a different UPnP Library (Ignoring Dummy Router) and try again</li>
-                            <li>Once Connected Create a Port Mapping Preset</li>
-                            <li>Name it SSX 3 and Add Port Range UDP 3658-3659 for Gameplay, UDP 6000-6001 for Voice Chat</li>
-                            <li>Untick Use Local Host and Put in PS2 Address</li>
-                            <li>Save and select the preset and click use</li>
-                            <li>If it appears in the port mappings at the top its worked otherwise you may need to review router settings</li>
+                            <li>Download <a href="https://github.com/kaklakariada/portmapper" target="_blank">Port Mapper</a></li>
+                            <li>On the Router Page click Connect</li>
+                            <ul>
+                                <li>If it fails to connect go to Port Mapper settings and try a different UPnP Library (ignoring Dummy Router) and try again</li>
+                            </ul>
+                            <li>Once Connected, create a Port Mapping preset</li>
+                            <ol>
+                                <li>Name: <code>SSX3</code>
+                                <li>Port Ranges: 
+                                    <ul>
+                                        <li><code>UDP 3658-3659</code> for Gameplay</li>
+                                        <li><code>UDP 6000-6001</code> for Voice Chat</li>
+                                    </ul>
+                                </li>
+                                <li>Untick <code>Use Local Host</code> and put in PS2 Address</li>
+                                <li>Save and select the preset and click use</li>
+                            </ol>
+                            <li>If it appears in the port mappings at the top, it worked. Otherwise you may need to review your router settings</li>
                         </ol>
                     </div>
                 </div>

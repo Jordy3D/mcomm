@@ -3,7 +3,8 @@ const navigationItems = [
     { url: 'index.html', text: 'Home' },
     { url: 'patch.html', text: 'Patch' },
     { url: 'guide.html', text: 'Guide' },
-    { url: 'highscores.html', text: 'Highscores' }
+    { url: 'highscores.html', text: 'Highscores' },
+    { url: 'online.html', text: 'Online' }
 ];
 
 // Create and inject navigation

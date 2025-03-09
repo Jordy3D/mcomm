@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+    <title>SSXOR - Match History</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/magic.css">
+
+    <script defer src="js/api.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/game.js"></script>
+    <script defer src="js/modal.js"></script>
+    <script defer src="js/history.js"></script>
+
+    <style>
+        main {
+            display: flex;
+            justify-content: flex-start !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Match History</h1>
+        <div class="nav-wrap shadow-wrap">
+            <nav class="quick-nav">
+                <!-- Dynamically populated -->
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="shadow-wrap">
+                <div class="panel">
+                    <div class="pagination-controls">
+                        <!-- Dynamically populated -->
+                    </div>
+
+                    <div class="sessions-container">
+                        <table class="scores-table">
+                            <thead>
+                                <tr>
+                                    <th>Players</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sessionsBody">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination-controls bottom">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Project by <a href="https://github.com/GlitcherOG">GlitcherOG(Archy)</a>. Site by <a href="https://github.com/Jordy3D">Bane</a>.</p>
+    </footer>
+</body>
+</html>

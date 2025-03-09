@@ -9,6 +9,7 @@ const navigationItems = [
     { url: 'patch.html', text: 'Patch' },
     { url: 'guide.html', text: 'Guide' },
     { url: 'highscores.html', text: 'Highscores' },
+    { url: 'history.html', text: 'History' },
     { url: 'online.html', text: 'Online' }
 ];
 
@@ -77,6 +78,57 @@ document.querySelectorAll('.panel-header').forEach(header => {
 
 // Initialize navigation when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeNavigation);
+
+// konami code detector for raw data view
+class KonamiCode {
+    constructor(callback) {
+        this.KONAMI_CODE = 'ArrowUp,ArrowUp,ArrowDown,ArrowDown,ArrowLeft,ArrowRight,ArrowLeft,ArrowRight,b,a,Enter';
+        this.konamiIndex = 0;
+        this.callback = callback;
+
+        document.addEventListener('keydown', this.onKeyDown.bind(this));
+    }
+
+    onKeyDown(e) {
+        if (e.key === this.KONAMI_CODE.split(',')[this.konamiIndex]) {
+            this.konamiIndex++;
+
+            // print a progress bar in the console
+            const progress = Array(this.konamiIndex + 1).join('█') + Array(this.KONAMI_CODE.split(',').length - this.konamiIndex + 1).join(' ');
+            console.log(`[${progress}] ${this.konamiIndex}/${this.KONAMI_CODE.split(',').length}`);
+
+            if (this.konamiIndex === this.KONAMI_CODE.split(',').length) {
+                this.konamiIndex = 0;
+                console.log('Debug view activated!');
+                if (this.callback) {
+                    this.callback();
+                }
+            }
+        } else {
+            this.konamiIndex = 0;
+            console.log('Womp womp!');
+        }
+    }
+}
+
+/*
+█ █ █▀▀ █   █▀█ █▀▀ █▀█ 
+█▀█ ██▄ █▄▄ █▀▀ ██▄ █▀▄ 
+*/
+
+function formatTime(ticks) {
+    const totalMilliseconds = (ticks / 60) * 1000;
+    const minutes = Math.floor(totalMilliseconds / 60000);
+    const seconds = Math.floor((totalMilliseconds % 60000) / 1000);
+    const milliseconds = Math.floor(totalMilliseconds % 1000);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(3, '0')}`;
+}
+
+function formatDate(dateStr) {
+    // Convert "2025.3.9 5:17:16" to a more readable format
+    const date = new Date(dateStr.replace(/\./g, '-'));
+    return date.toLocaleString();
+}
 
 /*
 █ █ █ █ █▄ █ █▀▄ █▀█ █ █ █ 

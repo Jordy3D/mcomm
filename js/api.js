@@ -1,14 +1,19 @@
 // API Endpoints for SSX Online Revival
 // 
-// ┃ METHOD ┃ ENDPOINT        ┃ DESCRIPTION                                   ┃
-// ┣━━━━━━━━╋━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-// ┃ GET    ┃ /highscore      ┃ Returns all highscores                        ┃
-// ┃ GET    ┃ /highscore/<ID> ┃ Returns highscores for the given course       ┃
-// ┃ GET    ┃ /online         ┃ Returns all online players                    ┃
-// ┃ GET    ┃ /room           ┃ Returns all rooms and the players inside them ┃
-// ┃ GET    ┃ /game/<RDF>     ┃ Returns the information about a given game    ┃
-// ┃        ┃                 ┃                                               ┃
-// ┃        ┃                 ┃                                               ┃
+// ┃ METHOD ┃ ENDPOINT              ┃ DESCRIPTION                                   ┃
+// ┣━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+// ┃ GET    ┃ /highscore            ┃ Returns all highscores                        ┃
+// ┃ GET    ┃ /highscore/<ID>       ┃ Returns highscores for the given course       ┃
+// ┃ GET    ┃ /online               ┃ Returns all online players                    ┃
+// ┃ GET    ┃ /room                 ┃ Returns all rooms and the players inside them ┃
+// ┃ GET    ┃ /game/<RDF>           ┃ Returns the information about a given game    ┃
+// ┃ GET    ┃ /session              ┃ Returns the first page of sessions            ┃
+// ┃ GET    ┃ /session/page/<INDEX> ┃ Returns the nth page of sessons               ┃
+// ┃        ┃                       ┃                                               ┃
+// ┃        ┃                       ┃                                               ┃
+// ┃        ┃                       ┃                                               ┃
+// ┃        ┃                       ┃                                               ┃
+// ┃        ┃                       ┃                                               ┃
 
 class APIService {
     static API_BASE_URL = 'http://ssxor.org/api';
@@ -23,7 +28,8 @@ class APIService {
         HIGHSCORES: { path: 'highscore', localFile: 'highscores.json' },
         ONLINE_PLAYERS: { path: 'online', localFile: 'online.json' },
         ACTIVE_ROOMS: { path: 'room', localFile: 'room.json' },
-        GAME: { path: 'game', localFile: 'game.json' }
+        GAME: { path: 'game', localFile: 'game.json' },
+        SESSION_PAGE: { path: 'session/page', localFile: 'history.json' },
     };
 
     static async loadLocalData(filename) {
@@ -47,17 +53,16 @@ class APIService {
         const endpoint = this.ENDPOINTS[endpointKey];
         var url = `${this.API_BASE_URL}/${endpoint.path}`;
 
+        if (endpointContinuation) {
+            url += `/${endpointContinuation}`;
+        }
+
         if (this.CORS_PROXY_ENABLED) {
             if (this.PROXY_NEEDED.some(host => window.location.href.includes(host))) {
                 url = `${this.CORS_PROXY}${url}`;
                 console.info(`Fetching data from ${url}`);
             }
         }
-
-        if (endpointContinuation) {
-            url += `/${endpointContinuation}`;
-        }
-
         
         try {
             // Try server first
@@ -107,6 +112,10 @@ class APIService {
         if (raw) return this.fetchFromAPI('GAME', `${rdf}&raw=1`);
 
         return this.fetchFromAPI('GAME', rdf);
+    }
+
+    static async fetchSessionPage(page = 1) {
+        return this.fetchFromAPI('SESSION_PAGE', page.toString());
     }
 }
 

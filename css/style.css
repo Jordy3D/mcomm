@@ -18,9 +18,21 @@
     --highlight-color: #d48731;
 
     /* Gradients */
-    --primary-gradient: linear-gradient(315deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    --secondary-gradient: linear-gradient(225deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    --hover-gradient: linear-gradient(315deg, var(--secondary-color) 0%, #6391b0 100%);
+    --primary-gradient: linear-gradient(
+        315deg,
+        var(--primary-color) 0%,
+        var(--secondary-color) 100%
+    );
+    --secondary-gradient: linear-gradient(
+        225deg,
+        var(--primary-color) 0%,
+        var(--secondary-color) 100%
+    );
+    --hover-gradient: linear-gradient(
+        315deg,
+        var(--secondary-color) 0%,
+        #6391b0 100%
+    );
 
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -34,8 +46,20 @@
     --shadow-box: var(--shadow-inset), var(--shadow-sm);
 
     /* Clips */
-    --clip-sm: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-    --clip-lg: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    --clip-sm: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        0 100%
+    );
+    --clip-lg: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        0 100%
+    );
 }
 
 * {
@@ -894,7 +918,7 @@ pre {
             font-size: 1.2em;
             color: #ffffff;
         }
-    
+
         .player-character {
             color: #93c3dc;
         }
@@ -1014,6 +1038,56 @@ pre {
     }
 }
 
+/* Sessions page specific styles */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+
+    &.bottom {
+        margin-top: 2rem;
+    }
+}
+
+.page-button {
+    background: rgba(64, 116, 151, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: "Orbitron", sans-serif;
+    font-size: 0.9em;
+    min-width: 40px;
+    text-align: center;
+
+    &:hover:not(:disabled) {
+        background: rgba(64, 116, 151, 0.5);
+        color: var(--light-color);
+    }
+
+    &.active {
+        background: var(--accent-color);
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.no-results {
+    text-align: center;
+    padding: var(--spacing-lg);
+    color: var(--accent-color);
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
 /*#endregion*/
 
 /* Debug */
@@ -1061,8 +1135,36 @@ pre {
 /*#region Responsive */
 @media (max-width: 768px) {
     header {
+        padding: var(--spacing-sm) 0;
+        padding-bottom: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-sm);
+
         h1 {
             position: relative;
+            bottom: unset;
+        }
+
+        .nav-wrap {
+            position: relative;
+            left: unset;
+            right: unset;
+            bottom: unset;
+            top: unset;
+            width: 100%;
+
+            padding: 0 var(--spacing-sm);
+
+            .quick-nav {
+                background: none;
+                justify-content: center;
+                gap: 1rem;
+
+                flex-wrap: wrap;
+            }
         }
     }
 
@@ -1072,17 +1174,18 @@ pre {
 
     .form-side,
     .preview-side {
-        --clip-lg: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+        --clip-lg: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            0 100%
+        );
     }
 
     .video-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-    }
-
-    .quick-nav {
-        left: 1rem;
-        bottom: -0.75rem;
     }
 
     .filter-controls {
@@ -1132,8 +1235,6 @@ pre {
 }
 
 /*#endregion*/
-
-
 
 /* TODO 
 

@@ -37,9 +37,14 @@ class Game {
         if (this.players.length < 2) return this.players[0];
         
         if (this.gameType === 'Race') {
-            return this.players.reduce((a, b) => 
-                parseInt(a.raceTime) < parseInt(b.raceTime) ? a : b
-            );
+            return this.players.reduce((a, b) => {
+                // If one player DNF'd and the other didn't, the non-DNF player wins
+                if (a.dnf && !b.dnf) return b;
+                if (!a.dnf && b.dnf) return a;
+                
+                // If both players finished or both DNF'd, compare race times
+                return parseInt(a.raceTime) < parseInt(b.raceTime) ? a : b;
+            });
         } else {
             return this.players.reduce((a, b) => 
                 parseInt(a.score) > parseInt(b.score) ? a : b

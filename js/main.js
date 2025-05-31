@@ -10,7 +10,8 @@ const navigationItems = [
     { url: 'guide.html', text: 'Guide' },
     { url: 'highscores.html', text: 'Highscores' },
     { url: 'history.html', text: 'History' },
-    { url: 'online.html', text: 'Online' }
+    { url: 'online.html', text: 'Online' },
+    { url: 'https://discord.me/ssx', text: 'Discord' },
 ];
 
 // Create and inject navigation

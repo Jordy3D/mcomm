@@ -86,14 +86,14 @@
                                     <li>Use modes 1 and 3 to generate a patched ISO</li>
                                 </ul>
                             </li>
-                            <li>Configure PCSX2 network settings:
+                            <li>Configure PCSX2 network settings (There are 3 ways to do so):
                                 <ol>
-                                    <li>If using .pnach for server address, leave DNS1 on <code>Auto</code> and skip to Step 3 or Set DNS1 to <code>Manual</code> and Use Setting <code>44.222.20.117</code> and skip to step 3</li>
-                                    <li>Set DNS1 Address to <code>Internal</code></li>
-                                    <li>Add entry in Internal DNS: <code>ps2ssx04.ea.com</code> → your server IP</li>
+                                    <li>If using .pnach for server address, leave DNS1 on <code>Auto</code></li>
+                                    <li>If using Internal DNS Set DNS1 Address to <code>Internal</code> and Add entry in Internal DNS: <code>ps2ssx04.ea.com</code> → <code>44.222.20.117</code></li>
+                                    <li>If using DNS Server Set DNS1 to Manual and Use Setting <code>44.222.20.117</code></li>
                                 </ol>
                             </li>
-                            <li>Set up PCAP (see <a href="#pcap-configuration">PCAP Configuration</a> section)</li>
+                            <li>Set up PCAP (see <a href="#pcap-configuration">PCAP Configuration</a> section) <br>Note: Sockets can be used instead of PCAP but isnt recommended as they can't be port forwarded</li>
                             <li>Port forward UDP ports:
                                 <ul>
                                     <li><code>3658-3659</code> for Gameplay</li>
@@ -241,7 +241,7 @@
     </main>
 
     <footer>
-        <p>Project by <a href="https://github.com/GlitcherOG">GlitcherOG(Archy)</a>. Site by <a href="https://github.com/Jordy3D">Bane</a>.</p>
+        <p>Project by <a href="https://github.com/GlitcherOG">GlitcherOG(Archy)</a>. Site by <a href="https://github.com/Jordy3D">Bane</a>. <a href="https://discord.me/ssx">Discord</a></p>
     </footer>
 </body>
 </html>

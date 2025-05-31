@@ -23,10 +23,18 @@ function initializeNavigation() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
     nav.innerHTML = navigationItems
-        .map(item => `
-            <a href="${item.url}" class="nav-item${currentPage === item.url ? ' active' : ''}">${item.text}</a>
-        `).join('');
+        .map(item => {
+            const isActive = currentPage === item.url;
+            const isExternal = item.url.startsWith('http');
+
+            const classString = `class="nav-item${isActive ? ' active' : ''}${isExternal ? ' external' : ''}"`;
+            const hrefString = isExternal ? `href="${item.url}" target="_blank"` : `href="${item.url}"`;
+            // Use template literals for better readability
+            return `<a ${hrefString} ${classString}>${item.text}</a>`;
+        })
+        .join('');
 }
+
 /*
 █   █▀█ ▄▀█ █▀▄ █ █▄ █ █▀▀ 
 █▄▄ █▄█ █▀█ █▄▀ █ █ ▀█ █▄█ 

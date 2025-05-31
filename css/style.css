@@ -114,6 +114,32 @@ a {
     &:visited {
         color: #93c3dc;
     }
+
+    &.external {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -5px !important;
+            left: 0;
+            width: 0;
+            height: 5px !important;
+            background: currentColor;
+            transition: width 0.2s ease;
+
+            clip-path: polygon(
+                0% 0%, 
+                100% 0, 
+                calc(100% - 10px) 100%, 
+                calc(100% - 10px) 50%, 
+                0 50%);
+        }
+
+        &:hover::after {
+            color: #ffffff;
+        }
+    }
 }
 
 /* Scrollbar styling */

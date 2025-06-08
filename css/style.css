@@ -412,6 +412,17 @@ h2 {
         ol ul {
             margin-top: 0.5rem;
         }
+
+        h3 {
+            margin-top: 0;
+            margin-left: -1rem;
+        }
+    }
+
+    .sub-steps {
+        > li {
+            list-style-type: decimal;
+        }
     }
 
     code {
@@ -1114,6 +1125,46 @@ pre {
     letter-spacing: 1px;
 }
 
+/* Quick Nav Sidebar */
+
+.quick-nav-sidebar {
+    /* left-side, small, middle of the page */
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 160px;
+    background: var(--secondary-gradient);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    clip-path: var(--clip-lg);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* white text */
+    color: #e4e4e4;
+    font-family: "Orbitron", sans-serif;
+    transition: left 0.3s ease;
+
+    a {
+        color: #93c3dc;
+        text-decoration: none;
+        font-size: 0.9em;
+        letter-spacing: 1px;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #ffffff;
+        }
+
+        &.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    }
+}
+
 /*#endregion*/
 
 /* Debug */
@@ -1159,6 +1210,20 @@ pre {
 */
 
 /*#region Responsive */
+@media (max-width: 1200px) {
+    /* make the aside hide until hovered */
+    .quick-nav-sidebar {
+        position: fixed;
+        top: 50%;
+        left: -150px; /* Hide off-screen */
+        transform: translateY(-50%);
+
+        &:hover {
+            left: 0; /* Show on hover */
+        }
+    }
+}
+
 @media (max-width: 768px) {
     header {
         padding: var(--spacing-sm) 0;
@@ -1172,6 +1237,7 @@ pre {
         h1 {
             position: relative;
             bottom: unset;
+            text-align: center !important;
         }
 
         .nav-wrap {

@@ -29,14 +29,14 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>Downloads</h2>
+                        <h2 id="downloads" data-aside-header="Downloads">Downloads & Requirements</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
                         <ul>
-                            <li><a href="https://npcap.com/#download" target="_blank">NPCAP</a> - (Optional) For network connectivity</li>
                             <li><a href="https://www.psx-place.com/threads/dnas-patcher-21.37973/" target="_blank">DNAS Patcher21</a> - Required to bypass DNAS checks</li>
                             <li><a href="https://github.com/GlitcherOG/Project-Mcomm/tree/main/Patches" target="_blank">Patches</a> - Premade pcsx2 patches</li>
+                            <li><a href="https://npcap.com/#download" target="_blank">NPCAP</a> - (Optional) For network connectivity</li>
                         </ul>
                         <div class="info-box">
                             <strong>Required Ports:</strong>
@@ -53,7 +53,7 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>Server Setup (Optional - For Hosting Only)</h2>
+                        <h2 id="server-setup" data-aside-header="Server Setup (Optional)">Server Setup (Optional - For Hosting Only)</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
@@ -76,7 +76,7 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>PCSX2 Configuration</h2>
+                        <h2 id="pcsx2-setup" data-aside-header="PCSX2">PCSX2 Configuration</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
@@ -93,13 +93,34 @@
                                     <li>If using DNS Server Set DNS1 to Manual and Use Setting <code>44.222.20.117</code></li>
                                 </ol>
                             </li>
-                            <li>There are two connection methods Soockets and PCAP, Sockets is the Recomended Method <br>To setup PCAP (see <a href="#pcap-configuration">PCAP Configuration</a> section)</li>
+                            <!-- <li>There are two connection methods Soockets and PCAP, Sockets is the Recomended Method <br>To setup PCAP (see <a href="#pcap-configuration">PCAP Configuration</a> section)</li>
                             <li>Port forward UDP ports (Not required for Sockets):
                                 <ul>
                                     <li><code>3658-3659</code> for Gameplay</li>
                                     <li><code>6000-6001</code> for Voice Chat</li>
                                 </ul>
-                            </li>
+                            </li> -->
+                            <!-- Same as above, but Sockets and PCAP have their own ol entries with subentries -->
+                            <li>There are two connection methods: Sockets and PCAP. <b>Sockets</b> is the recommended method.
+                                <ol>
+                                    <h3>Sockets</h3>
+                                    <ol class="sub-steps">
+                                        <li>Go to PCSX2 Settings → Network & HDD</li>
+                                        <li>Choose <code>Sockets</code> for Device Type</li>
+                                    </ol>
+                                    <h3>PCAP</h3>
+                                    <ol class="sub-steps">
+                                        <li>Follow the <a href="#pcap-configuration">PCAP Configuration</a> section for setup</li>
+                                        <li>Open your router settings and forward the following ports:
+                                            <ul>
+                                                <li><code>3658-3659</code> for Gameplay</li>
+                                                <li><code>6000-6001</code> for Voice Chat</li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    
+
+                                </ol>
                             <li>In-game network configuration:
                                 <ul>
                                     <li>Use settings: <code>Not Required</code>, <code>Auto</code>, <code>Auto</code></li>
@@ -114,7 +135,7 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>PCAP Configuration</h2>
+                        <h2 id="pcap-configuration" data-aside-header="PCAP">PCAP Configuration</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
@@ -125,7 +146,7 @@
                             <strong>Note:</strong> PCAP options treat PCSX2 as a unique device on your network, so you need to create an IP address for it
                         </div>
                         <ol>
-                            <li>Install NPCAP from the <a href="#required-downloads">Required Downloads</a> section</li>
+                            <li>Install NPCAP from the <a href="#downloads">Downloads</a> section</li>
                             <li>In PCSX2 Settings → Network & HDD:
                                 <ol>
                                     <li>Choose <code>PCAP Switched</code> for Ethernet or <code>PCAP Bridged</code> for WiFi</li>
@@ -143,7 +164,7 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>UPnP (Port Forwarding Alternative)</h2>
+                        <h2 id="upnp-configuration" data-aside-header="UPnP">UP<span style="text-transform: lowercase">n</span>P Configuration</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
@@ -178,7 +199,7 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>Windows Firewall Setup</h2>
+                        <h2 id="windows-firewall-setup" data-aside-header="Firewall">Windows Firewall Setup</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
@@ -214,7 +235,7 @@
             <div class="shadow-wrap">
                 <div class="panel">
                     <div class="panel-header">
-                        <h2>Common Issues & Notes</h2>
+                        <h2 id="common-issues" data-aside-header="Notes">Common Issues & Notes</h2>
                         <button class="collapse-toggle" aria-label="Toggle section">▼</button>
                     </div>
                     <div class="panel-content">
@@ -230,15 +251,60 @@
                             </li>
                             <li>"User has declined your challenge" error usually indicates port forwarding issues</li>
                             <li>Players on the same network can play together</li>
-			    <li>Cross Play Between PS2 and PCSX2 Not possible</li>
-			    <li>If failing to connect to server and website is still up disable the <code>.pnach</code> and use DNS setting <code>44.222.20.117</code></li>
-			    <li>Use DNS setting <code>44.222.20.117</code> for PS2</li>
+                            <li>Crossplay between PS2 and PCSX2 is not currently possible</li>
+                            <li>If failing to connect to server and website is still up disable the <code>.pnach</code> and use DNS setting <code>44.222.20.117</code></li>
+                            <li>Use DNS setting <code>44.222.20.117</code> for PS2</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <div class="quick-nav-sidebar">
+        <!-- auto-populate with the guide headers -->
+    </div>
+
+    <script>
+        var headerOffset = 45; // Adjust this value based on your header height
+        
+        // populate sidebar with guide headers and smooth scroll functionality
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebar = document.querySelector('.quick-nav-sidebar');
+            const headers = document.querySelectorAll('h2');
+
+            // if no headers or sidebar, exit early
+            if (headers.length === 0 || !sidebar) return;
+
+            headers.forEach(header => {
+                const link = document.createElement('a');
+                link.href = `#${header.id}`;
+                // Use the data-aside-header attribute if available, otherwise use the header text
+                link.textContent = header.getAttribute('data-aside-header') || header.textContent;
+                link.classList.add('sidebar-link');
+                
+                // Smooth scroll on click to the header that matches the link
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    
+                    // Get the rect position of the element relative to the viewport
+                    const rect = target.getBoundingClientRect();
+                    
+                    // Calculate the absolute position and adjust for header
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const targetPosition = scrollTop + rect.top - headerOffset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+
+                sidebar.appendChild(link);
+            });
+        });
+    </script>
 
     <footer>
         <p>Project by <a href="https://github.com/GlitcherOG" target="_blank">GlitcherOG(Archy)</a>. Site by <a href="https://github.com/Jordy3D" target="_blank">Bane</a> | <a href="https://discord.me/ssx" target="_blank">Discord</a></p>
